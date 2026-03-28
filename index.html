@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TapNow Lite - 本地大模型项目画布</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>TapNow Lite</h1>
+        <p>项目管理 + 无限画布 + 即时保存 + 多设备同网址恢复</p>
+      </div>
+      <div class="topbar-actions">
+        <button id="newProjectBtn">新建项目</button>
+        <button id="exportBtn">导出 JSON</button>
+        <label class="import-label">
+          导入 JSON
+          <input id="importInput" type="file" accept="application/json" />
+        </label>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <section class="panel">
+          <h2>项目列表</h2>
+          <div class="project-tools">
+            <input id="projectNameInput" placeholder="输入项目名" />
+            <button id="renameProjectBtn">重命名</button>
+            <button id="deleteProjectBtn" class="danger">删除</button>
+          </div>
+          <ul id="projectList"></ul>
+        </section>
+
+        <section class="panel">
+          <h2>本地大模型接入</h2>
+          <label>OpenAI 兼容地址
+            <input id="apiBaseInput" placeholder="http://127.0.0.1:11434/v1" />
+          </label>
+          <label>模型名
+            <input id="modelInput" placeholder="qwen2.5:14b 或 llama3.1" />
+          </label>
+          <label>API Key（可选）
+            <input id="apiKeyInput" type="password" placeholder="ollama 可留空" />
+          </label>
+          <button id="saveModelConfigBtn">保存模型配置</button>
+          <small>支持 Ollama / LocalAI / LM Studio 等 OpenAI 兼容接口。</small>
+        </section>
+
+        <section class="panel">
+          <h2>AI 助手</h2>
+          <textarea id="aiPrompt" rows="5" placeholder="例如：帮我梳理这个项目的里程碑与风险"></textarea>
+          <button id="askAiBtn">发送到本地模型</button>
+          <pre id="aiOutput"></pre>
+        </section>
+      </aside>
+
+      <section class="workspace">
+        <div class="toolbar">
+          <button id="addNoteBtn">添加便签</button>
+          <button id="resetViewBtn">重置视角</button>
+          <span id="saveStatus">已保存</span>
+        </div>
+        <div id="canvasContainer">
+          <div id="canvas"></div>
+        </div>
+      </section>
+    </main>
+
+    <template id="noteTemplate">
+      <article class="note">
+        <header>
+          <span class="drag-handle">☰</span>
+          <button class="remove-note">✕</button>
+        </header>
+        <textarea class="note-content" placeholder="记录你的想法..."></textarea>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
